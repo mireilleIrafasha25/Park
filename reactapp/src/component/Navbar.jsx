@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 import { Link } from "react-router-dom";
-
+import Login from "./login";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [model,setModel] = useState(0);
+const handleLoginform=()=>
+{
+    setModel(!model);
+  
+}
 
   const styles = {
     header: {
@@ -84,7 +90,10 @@ const Navbar = () => {
   };
 
   return (
+    <div>
+        {model && <Login handleLoginform={handleLoginform}/>}
     <header style={styles.header}>
+
       <div style={styles.navContainer}>
         <div style={styles.logoContainer}>
           <a href="/">
@@ -112,9 +121,9 @@ const Navbar = () => {
         </div>
 
         <div style={{ display: "flex", gap: "8px" }}>
-          <Link to="/login" style={styles.button}>
+          <button onClick={handleLoginform} style={styles.button}>
             Login
-          </Link>
+          </button>
           <Link to="/register" style={styles.button}>
             Register
           </Link>
@@ -166,6 +175,7 @@ const Navbar = () => {
         </ul>
       </div>
     </header>
+    </div>
   );
 };
 

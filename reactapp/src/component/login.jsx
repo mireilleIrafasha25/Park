@@ -1,35 +1,62 @@
 import React, { useState } from 'react';
-
-const Login = () => {
+import axios from 'axios';
+import { IoClose } from "react-icons/io5";
+const Login = ({handleLoginform}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const[message,setMessage]=useState('');
+  const [loading,setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log({ email, password });
+    setLoading(true);
+    try{
+        const response= await axios.post("http://localhost:5007/Weeding/user/signin",
+        {
+            email,
+            password,
+        });
+        setMessage(response.data.message)
+        localStorage.setItem("token",response.data.token);
+        
+    }
+    catch(error){
+        setMessage(error.response?.data?.message ||'Login Failed')
+    }
+    finally{
+        setLoading(false);
+    }
   };
-
+const styles={
+    overlay: {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.5)", // Black transparent background
+        zIndex: 1000, // Ensures it's on top of everything
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      modal: {
+        backgroundColor: "white",
+        padding: "2rem",
+        borderRadius: "8px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+        width: "400px",
+        maxWidth: "90%",
+      },
+}
   return (
     <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f3f4f6',
-      }}
+      style={styles.overlay}
     >
       <div
-        style={{
-          backgroundColor: 'white',
-          padding: '2rem',
-          borderRadius: '0.5rem',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          width: '100%',
-          maxWidth: '400px',
-        }}
+        style={styles.modal}
       >
-        <h2
+        <div style={{display:"flex",gap:"20px"}}><div
           style={{
             fontSize: '1.5rem',
             fontWeight: 'bold',
@@ -38,7 +65,7 @@ const Login = () => {
           }}
         >
           Login
-        </h2>
+        </div><IoClose onClick={handleLoginform}/></div>
         <form onSubmit={handleSubmit} style={{ marginTop: '1.5rem' }}>
           <div style={{ marginBottom: '1rem' }}>
             <label
@@ -53,8 +80,7 @@ const Login = () => {
             </label>
             <input
               type="email"
-              id="email"
-              value={email}
+             value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
@@ -82,7 +108,6 @@ const Login = () => {
             </label>
             <input
               type="password"
-              id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
@@ -105,6 +130,7 @@ const Login = () => {
               padding: '0.75rem',
               backgroundColor: '#48bb78',
               color: 'white',
+
               borderRadius: '0.375rem',
               fontWeight: 'bold',
               transition: 'background-color 0.3s',
@@ -113,10 +139,12 @@ const Login = () => {
             }}
             onMouseOver={(e) => (e.target.style.backgroundColor = '#38a169')}
             onMouseOut={(e) => (e.target.style.backgroundColor = '#48bb78')}
+            disabled={loading}
           >
-            Login
+            {loading? 'Loading...' : 'Login'}
           </button>
         </form>
+        {message && <p style={{ marginTop: '1rem', color: '#e74c3c' }}>{message}</p>}
         <p style={{ marginTop: '1rem', textAlign: 'center', color: '#718096' }}>
           Don’t have an account?{' '}
           <a
