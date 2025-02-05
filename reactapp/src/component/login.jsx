@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { IoClose } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 const Login = ({handleLoginform}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const[message,setMessage]=useState('');
   const [loading,setLoading] = useState(false);
-
+const navigate=useNavigate;
   const handleSubmit = async(e) => {
     e.preventDefault();
     setLoading(true);
@@ -18,7 +19,7 @@ const Login = ({handleLoginform}) => {
         });
         setMessage(response.data.message)
         localStorage.setItem("token",response.data.token);
-        
+        navigate("/dashboard")
     }
     catch(error){
         setMessage(error.response?.data?.message ||'Login Failed')

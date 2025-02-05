@@ -8,6 +8,8 @@ import Register from './component/register';
 import LocationExample from './component/useLocation';
 import Home from './component/home';
 import PostDetails from './component/postDetails';
+import UserDashboard from './component/dashboard';
+import BlogCard2 from './component/BlogCard2';
 function App() {
   
 
@@ -19,8 +21,9 @@ function App() {
   <Route path='contact-us' element={<Contact/>} />
   <Route path='login' element={<Login/>} />
   <Route path='register' element={<Register/>} />
-  <Route path="/posts/:postId" element={<PostDetails />} />
+  <Route path="/posts/:blogId" element={<BlogCard2 />} />
   <Route path="/location" element={<LocationExample />} />
+  <Route path="/dashboard" element={<UserDashboard />} />
   </Route>
       </Routes>
     </Router>

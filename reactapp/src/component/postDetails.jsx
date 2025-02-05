@@ -9,7 +9,7 @@ const posts = [
 function PostDetails() {
   const { postId } = useParams(); // Extract the postId from the URL
   const post = posts.find((p) => p.id === parseInt(postId));
-
+  
   if (!post) return <p>Post not found!</p>;
 
   return (
