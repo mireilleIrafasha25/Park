@@ -1,6 +1,6 @@
 import { TiArrowRight } from "react-icons/ti";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaTiktok, FaYoutube } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer style={{ backgroundColor: "#1a1a1a", color: "white", padding: "3rem 1rem" }}>
@@ -14,7 +14,7 @@ const Footer = () => {
         
         {/* Quick Links */}
         <div style={{ width: "100%", maxWidth: "25%", marginBottom: "1rem" }}>
-          <h3 style={{ fontWeight: "bold", fontSize: "1.25rem", marginBottom: "1rem" }}>Quick Links</h3>
+         <Link to="posts/:{postId}"> <h3 style={{ fontWeight: "bold", fontSize: "1.25rem", marginBottom: "1rem" }}>Quick Links</h3></Link>
           <ul style={{ listStyle: "none", padding: 0, color: "#9ca3af" }}>
             {["Home", "About Us", "Services", "Contact"].map((link, index) => (
               <li key={index} style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.75rem" }}>

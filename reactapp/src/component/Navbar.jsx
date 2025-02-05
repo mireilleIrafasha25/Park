@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Login from "./login";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [model,setModel] = useState(0);
+  const [model,setModel] = useState(false);
 const handleLoginform=()=>
 {
     setModel(!model);
@@ -93,7 +93,7 @@ const handleLoginform=()=>
     <div>
         {model && <Login handleLoginform={handleLoginform}/>}
     <header style={styles.header}>
-
+  
       <div style={styles.navContainer}>
         <div style={styles.logoContainer}>
           <a href="/">

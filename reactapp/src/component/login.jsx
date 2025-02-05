@@ -56,7 +56,7 @@ const styles={
       <div
         style={styles.modal}
       >
-        <div style={{display:"flex",gap:"20px"}}><div
+        <div style={{display:"flex",gap:"300px",flexDirection:"row"}}><div
           style={{
             fontSize: '1.5rem',
             fontWeight: 'bold',
@@ -65,7 +65,7 @@ const styles={
           }}
         >
           Login
-        </div><IoClose onClick={handleLoginform}/></div>
+        </div><IoClose onClick={handleLoginform} style={{marginTop:"10px"}} /></div>
         <form onSubmit={handleSubmit} style={{ marginTop: '1.5rem' }}>
           <div style={{ marginBottom: '1rem' }}>
             <label
